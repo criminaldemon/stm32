@@ -1,0 +1,24 @@
+#include "stm32f10x.h"
+
+void RCC_Configuration(void);
+main(void)
+{
+GPIO_InitTypeDef GPIO_InitStructure;
+
+RCC_Configuration();
+
+GPIO_InitStructure.GPIO_Pin_0;
+GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
+GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
+//IO配置为输出口
+GPIO_Init(GPIOC,&GPIO_InitStructure);
+
+GPIO_RestBits(GPIOC,GPIO_Pin_0);//阴极基点亮LED灯
+}
+
+void RCC_Configuration()
+{
+SystemInit();
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
+//使能GPIOC时钟
+}
