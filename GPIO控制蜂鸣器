@@ -1,0 +1,22 @@
+#include<stm32f10x.h>
+
+void RCC_Configuration(void);
+main(void)
+{
+ GPIO_InitTypeDef GPIO_InitStructure;
+ 
+ RCC_Configuration();
+	
+GPIO_InitStructure.GPIO_Pin=GPIO_Pin_5;
+GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
+GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
+GPIO_Init(GPIOB,&GPIO_InitStructure);
+//IO配置为输出口
+GPIO_SetBits(GPIOC, GPIO_Pin_5);//输入信号通过PB5启动蜂鸣器
+}
+
+void RCC_Configuration()
+{
+SystemInit();//72M
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);//使能GPIOB时钟
+}
